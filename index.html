@@ -32,6 +32,25 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "zaxgedqhqo");
   </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1007635155711134');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', { content_name: 'Canadian Rapid Recovery Report 2025' });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1007635155711134&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body class="bg-slate-900 text-slate-100 antialiased selection:bg-cyan-500 selection:text-white">
 
@@ -124,6 +143,16 @@
             <span><strong>Direct Canadian Domestic Dispatch:</strong> Eliminates cross-border customs delays, heat damage during long transit, and unpredictable postal holding times.</span>
           </li>
         </ul>
+
+        <!-- Mid-Content Fast CTA -->
+        <div class="mt-6 pt-5 border-t border-slate-700/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="text-xs text-slate-400 text-center sm:text-left">
+            🇨🇦 <span class="text-slate-200 font-medium">Domestic Canadian Stock Ready:</span> BPC-157, TB-500, Semaglutide & more.
+          </div>
+          <button type="button" class="proceedTrigger w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-2.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-sm transition-all shadow-md shadow-cyan-500/20 cursor-pointer">
+            <span>View Available Batches →</span>
+          </button>
+        </div>
       </div>
 
       <h2 class="text-xl sm:text-2xl font-bold text-white mt-8 mb-4">
@@ -188,7 +217,7 @@
         <div>
           <!-- Safe Action Trigger -->
           <button type="button" id="proceedBtn"
-             class="cursor-pointer inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-base transition-all duration-200 transform hover:scale-105 shadow-lg shadow-cyan-500/25">
+             class="proceedTrigger cursor-pointer inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-base transition-all duration-200 transform hover:scale-105 shadow-lg shadow-cyan-500/25">
             <span>Explore Verified Canadian Stock</span>
             <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -252,18 +281,19 @@
   <!-- Dynamic Safe Gateway (Assembled dynamically only on human interaction) -->
   <script>
     (function() {
-      const proceedBtn = document.getElementById("proceedBtn");
       const modal = document.getElementById("complianceModal");
       const confirmProceed = document.getElementById("confirmProceed");
       const closeModal = document.getElementById("closeModal");
 
-      // Open Modal on user click
-      proceedBtn.addEventListener("click", function(e) {
-        e.preventDefault();
-        modal.classList.remove("hidden");
-        setTimeout(function() {
-          modal.classList.remove("opacity-0");
-        }, 10);
+      // Open Modal on user click from any trigger button
+      document.querySelectorAll(".proceedTrigger").forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+          e.preventDefault();
+          modal.classList.remove("hidden");
+          setTimeout(function() {
+            modal.classList.remove("opacity-0");
+          }, 10);
+        });
       });
 
       // Close Modal
@@ -294,12 +324,16 @@
             targetUrl.searchParams.set("utm_campaign", "canada_rapid_recovery_2025");
           }
 
-          window.open(targetUrl.toString(), "_blank");
-          
-          modal.classList.add("opacity-0");
-          setTimeout(function() { modal.classList.add("hidden"); }, 300);
+          // Track Meta Pixel Outbound / Lead Event before redirecting
+          if (typeof fbq === 'function') {
+            fbq('track', 'InitiateCheckout', { content_name: 'Verified Batch Inquiry' });
+          }
+
+          // Direct location transition (100% reliable inside mobile Facebook in-app browser)
+          window.location.href = targetUrl.toString();
         } catch (err) {
           console.error("Navigation error", err);
+          window.location.href = "https://labtestedpeptidescanada.to/";
         }
       });
     })();
